@@ -50,6 +50,25 @@
 
             }
 
+            componentDidMount(){
+                
+                const front = localStorage.getItem("front");
+                const back = localStorage.getItem("back");
+
+                if(front !== null && back !== null) {
+                    this.setState({ 
+                        front: front, 
+                        back: back 
+                    });
+                }
+
+                window.addEventListener("beforeunload", () => {
+                    localStorage.setItem("front", this.state.front)
+                    localStorage.setItem("back", this.state.back)
+                });
+
+            }
+
             render() {
                 const rows = this.props.cards.map((card, i) => {
                     return (
